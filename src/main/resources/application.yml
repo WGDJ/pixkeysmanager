@@ -1,5 +1,8 @@
 
 spring:
+  mongodb:
+    embedded:
+      version: 4.0.21
   data:
     mongodb:
       uuid-representation: standard
