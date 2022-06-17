@@ -34,7 +34,7 @@ public class CreateKeyIntegrationTest {
     private MongoTemplate mongoTemplate;
 
     @BeforeEach
-    private void  cleanUpMongo() {
+    private void cleanUpMongo() {
         mongoTemplate.remove(new Query(), Account.class);
     }
 
