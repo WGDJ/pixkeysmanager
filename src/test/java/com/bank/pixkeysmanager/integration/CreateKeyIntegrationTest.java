@@ -107,7 +107,7 @@ public class CreateKeyIntegrationTest {
     }
 
     @DisplayName("Teste deleção de chave pix")
-//    @Test
+    @Test
     public void findKey() throws Exception {
 
         CreateKeyRequest createKeyRequest = new CreateKeyRequest("CELULAR", "+5586988725862", "CORRENTE",
@@ -128,7 +128,7 @@ public class CreateKeyIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$[0].keys[0].id", is(createKeyResponse.getId())));
+                .andExpect(jsonPath("$[0].chavesPix[0].id", is(createKeyResponse.getId().toString())));
 
     }
 }
