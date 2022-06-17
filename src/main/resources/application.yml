@@ -1,0 +1,7 @@
+
+spring:
+  data:
+    mongodb:
+      uuid-representation: standard
+      database: ${DATABASE_NAME:pixmanager}
+      uri: mongodb://${MONGO_USER:root}:${MONGO_PASS:root}@${MONGODB_HOST:127.0.0.1:27017}
