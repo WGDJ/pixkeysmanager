@@ -106,7 +106,7 @@ public class CreateKeyIntegrationTest {
 
     }
 
-    @DisplayName("Teste deleção de chave pix")
+    @DisplayName("Teste busca de chave pix")
     @Test
     public void findKey() throws Exception {
 
