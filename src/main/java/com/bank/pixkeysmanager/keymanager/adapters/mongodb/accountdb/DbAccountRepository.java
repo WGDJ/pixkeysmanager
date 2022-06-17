@@ -48,7 +48,7 @@ public class DbAccountRepository implements AccountRepository {
     @Override
     public Account getByKeyId(final UUID id) {
         Criteria criteria = Criteria.where("keys")
-                .elemMatch(Criteria.where("deleted").is(false).and("id").is(id));
+                .elemMatch(Criteria.where("deleted").is(false).and("_id").is(id));
 
         BooleanOperators.And projectionKeysFilter = BooleanOperators.And.and(valueOf("key.deleted").equalToValue(false));
 
@@ -57,21 +57,17 @@ public class DbAccountRepository implements AccountRepository {
 
     @Override
     public Boolean existsKeyByValue(final Key key) {
-        Query query = new Query(Criteria.where("keys")
+        return mongoTemplate.exists(new Query(Criteria.where("keys")
                 .elemMatch(Criteria.where("deleted").is(false)
-                        .and("value").is(key.getValue())));
-        return mongoTemplate.exists(query, Account.class);
+                        .and("value").is(key.getValue()))), Account.class);
     }
 
     @Override
     public Boolean existsKeyByType(final Account account, final Key key) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("id").is(account.getId()));
-        query.addCriteria(Criteria.where("keys")
+        return mongoTemplate.exists(new Query().addCriteria(Criteria.where("keys")
                 .elemMatch(Criteria.where("deleted").is(false)
-                        .and("type").is(key.getType())));
-
-        return mongoTemplate.exists(query, Account.class);
+                        .and("type").is(key.getType()))
+                .and("_id").is(account.getId())), Account.class);
     }
 
     @Override
